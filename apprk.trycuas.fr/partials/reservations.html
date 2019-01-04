@@ -1,0 +1,65 @@
+<div class="widget-box" id="recent-box" ng-controller="reservationsController">
+<div class="widget-header header-color-blue">
+<div class="row">
+<div class="col-sm-6">
+<h4 class="bigger lighter">
+	<i class="glyphicon glyphicon-align-justify"></i>&nbsp;
+	RESERVATIONS
+</h4>
+</div>
+<div class="col-sm-3">
+
+</div>
+<div class="col-sm-3">
+
+<input type="text" ng-model="filterReservations" class="form-control search header-elements-margin" placeholder="Filter réservations">
+
+</div>
+</div></div>
+<div class="widget-body ">
+  
+
+    
+<form ng-init="addNewClicked=false; "  id="newTaskForm" class="add-task ">
+<div class="form-actions ">
+<div class="input-group  ">
+    
+<input type="text" class="form " name="comment" ng-model="reservLigne" placeholder="Ligne " ng-focus="addNewClicked" >
+<input type="number" class="form " name="comment" ng-model="reservNumero" placeholder="Numéro mouillage " ng-focus="addNewClicked">    
+<input type="text" class="form " name="comment" ng-model="reservNom" placeholder="Nom" ng-focus="addNewClicked" >    
+<input type="text" class="form " name="comment" ng-model="reservPrenom" placeholder="Prénom" ng-focus="addNewClicked" > 
+    
+<input type="text" class="form " name="comment" ng-model="reservTel" placeholder="tel" ng-focus="addNewClicked" >     
+<input type="text" class="form" name="comment" ng-model="reservNomBateau" placeholder="Nom duBateau" ng-focus="addNewClicked" >      
+<input type="text" class="form " name="comment" ng-model="reservTypeBateau" placeholder="type de bateau" ng-focus="addNewClicked" >        
+<input type="date" data-date-format="DD-YYYY-MM"  value="2018-06-01"class="form " name="comment" ng-model="reservDateDebut.value" placeholder="Date de début" ng-focus="addNewClicked"/>
+<input type="date" data-date-format="DD-YYYY-MM" value="2018-06-01" class="form " name="comment" ng-model="reservDateFin.value"   placeholder="Date de fin"  />        
+
+<div class="input-group-btn ">
+<button class="btn btn-default" type="submit" ng-click="modifierRerserv(reservLigne,reservNumero,reservNom,reservPrenom,reservTel,reservNomBateau,reservTypeBateau,reservDateDebut.value,reservDateFin.value);"><i class="glyphicon glyphicon-plus"></i>&nbsp;Enregistrer</button>
+</div>
+    
+</div>
+</div>
+</form>
+
+    
+<br/>     
+    
+<br/>    
+ 
+ <div class="reservation row ">
+    <span class="col-sm-1">Ligne</span> <span class="col-sm-1">N°mouillage</span> <span class="col-sm-1">Nom</span> <span class="col-sm-1">Prenom</span> <span class="col-sm-1"> Tel</span><span class="col-sm-1"> Nom Bateau</span>
+    <span class="col-sm-1">type de Bateau</span><span class="col-sm-1">Date début </span> <span class="col-sm-1">Date fin </span>       
+        
+</div>  
+
+<div  class=" resarvation  row" ng-repeat="reservation in reservations | filter : filterReservations ">
+    
+    <span class="col-sm-1">{{reservation.LIGNE}}</span><span class="col-sm-1">{{reservation.NUMERO}}</span> <span class="col-sm-1">{{reservation.NOM_ADHERENT}}</span> <span class="col-sm-1">{{reservation.PRENOM_ADHERENT}}</span> <span class="col-sm-1">{{reservation.TEL_ADHERENT}}</span><span class="col-sm-1">{{reservation.NOM_BATEAU }}</span> <span class="col-sm-1">{{reservation.TYPE_BATEAU}}</span><span class="col-sm-1">{{reservation.DATE_DEBUT}} </span> <span class="col-sm-1" >{{reservation.DATE_FIN}}           
+    <a  ng-click="  addNewClicked=!addNewClicked;selectReserv(reservation.ADHERENT_idADHERENT,reservation.MOUILLAGES_idMOUILL,reservation.LIGNE,reservation.NUMERO,reservation.NOM_ADHERENT,reservation.PRENOM_ADHERENT,reservation.TEL_ADHERENT,reservation.idBATEAU,reservation.NOM_BATEAU,reservation.TYPE_BATEAU,reservation.DATE_DEBUT,reservation.DATE_FIN)" class="pull-right"><i class="glyphicon glyphicon-pencil"></i></a>  </span>       
+  
+</div>
+
+</div>
+</div>

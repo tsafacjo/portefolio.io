@@ -1,0 +1,60 @@
+<div class="widget-box" id="recent-box" ng-controller="adherentController">
+<div class="widget-header header-color-blue">
+<div class="row">
+<div class="col-sm-6">
+<h4 class="bigger lighter">
+	<i class="glyphicon glyphicon-align-justify"></i>&nbsp;
+	ADHERENTS
+</h4>
+</div>
+<div class="col-sm-3">
+<button ng-click="addNewClicked=!addNewClicked; clear() ;" class="btn btn-sm btn-primary header-elements-margin"><i class="glyphicon  glyphicon-plus"></i>&nbsp;Ajouter un adhérent</button>
+</div>
+<div class="col-sm-3">
+
+<input type="text" ng-model="filterAdherents" class="form-control search header-elements-margin" placeholder="Filter réservations">
+
+</div>
+</div></div>
+<div class="widget-body ">
+<form ng-init="addNewClicked=false; " ng-if="addNewClicked" id="newTaskForm" class="add-task">
+<div class="form-actions">
+<div class="input-group">
+    
+<input type="text" class="form" name="comment" ng-model="adherentNom" placeholder="nom" ng-focus="addNewClicked" >
+<input type="text" class="form" name="comment" ng-model="adherentPrenom" placeholder="prénom" ng-focus="addNewClicked">    
+<input type="text" class="form" name="comment" ng-model="adherentTel" placeholder="Tel" ng-focus="addNewClicked" >    
+<input type="email" class="form" name="comment" ng-model="adherentEmail" placeholder="email" ng-focus="addNewClicked" > 
+    
+
+<div class="input-group-btn">
+<button class="btn btn-default" type="submit" ng-click="modifierAdherent(adherentNom,adherentPrenom,adherentTel,adherentEmail) ;"><i class="glyphicon glyphicon-plus"></i>&nbsp;Enregistrer</button>
+    
+</div>
+</div>
+</div>
+</form>
+
+    
+<br/>   
+<div class="adherent row ">
+    
+  <span class="col-sm-3">Nom </span> <span class="col-sm-3">Prénom</span> <span class="col-sm-3">Tel</span> <span class="col-sm-3"> Email</span>
+    
+</div>  
+    
+<br/>    
+        
+<div class=" adherent  row" ng-repeat="adherent in adherents | filter : filterAdherents ">
+    
+    <span class="col-sm-3">{{adherent.NOM_ADHERENT}}</span><span class="col-sm-3">{{adherent.PRENOM_ADHERENT}}</span> <span class="col-sm-3">{{adherent.TEL_ADHERENT}}</span> <span class="col-sm-3">{{adherent.MAIL_ADHERENT }} 
+    
+    <a   href="#reservations///{{adherent.idADHERENT}}/{{adherent.NOM_ADHERENT}}/{{adherent.PRENOM_ADHERENT}}/{{adherent.TEL_ADHERENT}}"  class="pull-right"><i class="glyphicon glyphicon glyphicon-briefcase"></i> Reser </a>
+    <a  ng-click="addNewClicked=!addNewClicked;  selectAdherent(adherent.idADHERENT,adherent.NOM_ADHERENT,adherent.PRENOM_ADHERENT,adherent.TEL_ADHERENT,adherent.EMAIL_ADHERENT) ;" class="pull-right"><i class="glyphicon glyphicon-pencil"></i> Modi </a>
+       <a  ng-click="addNewClicked=!addNewClicked;  deleteAdhe(adherent.idADHERENT) ;" class="pull-right"><i class="glyphicon glyphicon-remove-sign"></i> Suppri </a>
+    </span>       
+  
+</div>
+
+</div>
+</div>

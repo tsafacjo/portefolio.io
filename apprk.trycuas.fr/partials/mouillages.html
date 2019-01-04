@@ -1,0 +1,163 @@
+<div class="widget-box" id="recent-box" ng-controller="mouillagesController">
+<div class="widget-header header-color-blue">
+<div class="row">
+<div class="col-sm-6">
+<h4 class="bigger lighter">
+	<i class="glyphicon glyphicon-align-justify"></i>&nbsp;
+	PLAN D'EAU 
+</h4>
+</div>
+<div class="col-sm-3">
+<button ng-click="addNewClicked=!addNewClicked; clear() ;addMouill() ;" class="btn btn-sm btn-primary header-elements-margin"><i class="glyphicon  glyphicon-plus"></i>&nbsp;Ajouter un Mouillage</button>
+</div>
+<div class="col-sm-3">
+
+<input type="text" ng-model="filterMouill" class="form-control search header-elements-margin" placeholder="Filtrer mouillage">
+
+</div>
+</div></div>
+<div class="widget-body ">
+<form ng-init="addNewClicked=false; " ng-if="addNewClicked" id="newTaskForm" class="add-task">
+<div class="form-actions">
+<div class="input-group">
+    
+<input type="text" class="form" name="comment" ng-model="mouillLigne" placeholder="Ligne " ng-focus="addNewClicked" >
+<input type="number" class="form" name="comment" ng-model="mouillNumero" placeholder="Numéro" ng-focus="addNewClicked">
+    
+   <select name="mySelect" id="mySelect"
+      ng-options="option.name for option in typebouee.availableOptions track by option.id"
+      ng-model="typebouee.selectedOption"></select>
+    
+<input type="number"  step="any"  class="form" name="comment" ng-model="mouillProfondeur" placeholder="profondeur" ng-focus="addNewClicked">
+<input type="number"  step="any"  class="form" name="comment" ng-model="mouillDiametre" placeholder="Diamètre"   ng-focus="addNewClicked">
+    
+<div class="input-group-btn">
+<button class="btn btn-default" type="submit" ng-click="modifierMouill(mouillProfondeur,mouillNumero,typebouee.selectedOption.id,mouillLigne);"><i class="glyphicon glyphicon-plus"></i>&nbsp;Enregistrer</button>
+</div>
+</div>
+</div>
+</form>
+
+<div class="task row ">
+         <span class="col-sm-2">A</span>  <span class="col-sm-2">B</span>  <span class="col-sm-2">C</span>  <span class="col-sm-2">D</span> <span class="col-sm-2">E</span>  <span class="col-sm-2">F</span> 
+    
+        
+</div>
+<div class="task row ">
+
+        <div class="task-F col-sm-2   ">  
+        N° Prof  Bouee Diamètre
+        <label   class= " {{getCssMouillage(task.LIBRE)}} " ng-repeat="task in tasks | startsWithLetter:'A'| filter : filterMouill ">
+        <!--<input 
+        type="checkbox"
+        value="{{task.STATUS}}"
+        ng-checked="task.STATUS==2"
+        ng-click="toggleStatus(task.ID,task.STATUS, task.TASK)"/> -->
+            
+          
+        <span >{{task.NUMERO}}   {{task.TYPE_BOUEE}} </span>
+        
+        <a  ng-click="addNewClicked=!addNewClicked;  deleteAdhe(adherent.idADHERENT) ;" class="pull-right"><i class="glyphicon glyphicon-remove-sign"></i> Su </a> 
+        <a ng-click="  addNewClicked=!addNewClicked;selectTask(task.idMOUILL,task.LIGNE,task.NUMERO,task.TYPE_BOUEE,task.MOUILL_PROFONDEUR,task.DIAMETRE_CHAINE)" class="pull-right"><i class="glyphicon glyphicon-pencil">Mo </i></a>
+        <a   href="#reservations/{{task.LIGNE}} /{{task.NUMERO}}////"  class="pull-right"><i class="glyphicon glyphicon glyphicon-briefcase"></i> Re</a>
+        <a  ng-click="addNewClicked=!addNewClicked;  deleteAdhe(adherent.idADHERENT) ;" class="pull-right"><i class="glyphicon glyphicon-plus"></i>O</a>                        
+        </label>
+        </div> 
+    
+ 
+    <div class="task-F col-sm-2">  
+        N° Prof  Bouee Diamètre
+        <label class="{{getCssMouillage(task.LIBRE)}}" ng-repeat="task in tasks | startsWithLetter:'B'| filter : filterMouill ">
+        <!--<input 
+        type="checkbox"
+        value="{{task.STATUS}}"
+        ng-checked="task.STATUS==2"
+        ng-click="toggleStatus(task.ID,task.STATUS, task.TASK)"/> -->
+
+        <span ng-class="">{{task.NUMERO}}  {{task.TYPE_BOUEE}} </span>
+            
+        <a  ng-click="addNewClicked=!addNewClicked;  deleteAdhe(adherent.idADHERENT) ;" class="pull-right"><i class="glyphicon glyphicon-remove-sign"></i> Su </a> 
+        <a ng-click="  addNewClicked=!addNewClicked;selectTask(task.idMOUILL,task.LIGNE,task.NUMERO,task.TYPE_BOUEE,task.MOUILL_PROFONDEUR,task.DIAMETRE_CHAINE)" class="pull-right"><i class="glyphicon glyphicon-pencil">Mo </i></a>
+        <a   href="#reservations/{{task.LIGNE}} /{{task.NUMERO}}////"  class="pull-right"><i class="glyphicon glyphicon glyphicon-briefcase"></i> Re</a>
+        <a  ng-click="addNewClicked=!addNewClicked;  deleteAdhe(adherent.idADHERENT) ;" class="pull-right"><i class="glyphicon glyphicon-plus"></i>O</a>  
+            
+        </label>
+     </div>
+
+    <div class="task-F col-sm-2">  
+        N° Prof  Bouee Diamètre
+        <label class="{{getCssMouillage(task.LIBRE)}}" ng-repeat="task in tasks | startsWithLetter:'C'| filter : filterMouill ">
+        <!--<input 
+        type="checkbox"
+        value="{{task.STATUS}}"
+        ng-checked="task.STATUS==2"
+        ng-click="toggleStatus(task.ID,task.STATUS, task.TASK)"/> -->
+
+        <span ng-class="">{{task.NUMERO}}  {{task.TYPE_BOUEE}}</span>
+            
+        <a  ng-click="addNewClicked=!addNewClicked;  deleteAdhe(adherent.idADHERENT) ;" class="pull-right"><i class="glyphicon glyphicon-remove-sign"></i> Su </a> 
+        <a ng-click="  addNewClicked=!addNewClicked;selectTask(task.idMOUILL,task.LIGNE,task.NUMERO,task.TYPE_BOUEE,task.MOUILL_PROFONDEUR,task.DIAMETRE_CHAINE)" class="pull-right"><i class="glyphicon glyphicon-pencil">Mo </i></a>
+        <a   href="#reservations/{{task.LIGNE}} /{{task.NUMERO}}////"  class="pull-right"><i class="glyphicon glyphicon glyphicon-briefcase"></i> Re</a>
+        <a  ng-click="addNewClicked=!addNewClicked;  deleteAdhe(adherent.idADHERENT) ;" class="pull-right"><i class="glyphicon glyphicon-plus"></i>O</a>  
+            
+        </label>
+     </div>
+        <div class="task-F col-sm-2">  
+        N° Prof  Bouee Diamètre
+        <label class="{{getCssMouillage(task.LIBRE)}}" ng-repeat="task in tasks | startsWithLetter:'D' | filter : filterMouill">
+        <!--<input 
+        type="checkbox"
+        value="{{task.STATUS}}"
+        ng-checked="task.STATUS==2"
+        ng-click="toggleStatus(task.ID,task.STATUS, task.TASK)"/> -->
+
+        <span ng-class="">{{task.NUMERO}}  {{task.TYPE_BOUEE}}</span>
+            
+        <a  ng-click="addNewClicked=!addNewClicked;  deleteAdhe(adherent.idADHERENT) ;" class="pull-right"><i class="glyphicon glyphicon-remove-sign"></i> Su </a> 
+        <a ng-click="  addNewClicked=!addNewClicked;selectTask(task.idMOUILL,task.LIGNE,task.NUMERO,task.TYPE_BOUEE,task.MOUILL_PROFONDEUR,task.DIAMETRE_CHAINE)" class="pull-right"><i class="glyphicon glyphicon-pencil">Mo </i></a>
+        <a   href="#reservations/{{task.LIGNE}} /{{task.NUMERO}}////"  class="pull-right"><i class="glyphicon glyphicon glyphicon-briefcase"></i> Re</a>
+        <a  ng-click="addNewClicked=!addNewClicked;  deleteAdhe(adherent.idADHERENT) ;" class="pull-right"><i class="glyphicon glyphicon-plus"></i>O</a>  
+            
+        </label>
+     </div> 
+         <div class="task-F col-sm-2">  
+        N° Prof  Bouee Diamètre
+        <label class="{{getCssMouillage(task.LIBRE)}}" ng-repeat="task in tasks | startsWithLetter:'E'| filter : filterMouill ">
+        <!--<input 
+        type="checkbox"
+        value="{{task.STATUS}}"
+        ng-checked="task.STATUS==2"
+        ng-click="toggleStatus(task.ID,task.STATUS, task.TASK)"/> -->
+
+        <span ng-class="">{{task.NUMERO}}  {{task.TYPE_BOUEE}}</span>
+            
+        <a  ng-click="addNewClicked=!addNewClicked;  deleteAdhe(adherent.idADHERENT) ;" class="pull-right"><i class="glyphicon glyphicon-remove-sign"></i> Su </a> 
+        <a ng-click="  addNewClicked=!addNewClicked;selectTask(task.idMOUILL,task.LIGNE,task.NUMERO,task.TYPE_BOUEE,task.MOUILL_PROFONDEUR,task.DIAMETRE_CHAINE)" class="pull-right"><i class="glyphicon glyphicon-pencil">Mo </i></a>
+        <a   href="#reservations/{{task.LIGNE}} /{{task.NUMERO}}////"  class="pull-right"><i class="glyphicon glyphicon glyphicon-briefcase"></i> Re</a>
+        <a  ng-click="addNewClicked=!addNewClicked;  deleteAdhe(adherent.idADHERENT) ;" class="pull-right"><i class="glyphicon glyphicon-plus"></i>O</a>  
+            
+        </label>
+     </div>    
+        <div class="task-F col-sm-2">  
+        N° Prof  Bouee Diamètre
+        <label class="{{getCssMouillage(task.LIBRE)}}" ng-repeat="task in tasks | startsWithLetter:'F'| filter : filterMouill ">
+        <!--<input 
+        type="checkbox"
+        value="{{task.STATUS}}"
+        ng-checked="task.STATUS==2"
+        ng-click="toggleStatus(task.ID,task.STATUS, task.TASK)"/> -->
+
+        <span ng-class="">{{task.NUMERO}}  {{task.TYPE_BOUEE}}</span>
+            
+        <a  ng-click="addNewClicked=!addNewClicked;  deleteAdhe(adherent.idADHERENT) ;" class="pull-right"><i class="glyphicon glyphicon-remove-sign"></i> Su </a> 
+        <a ng-click="  addNewClicked=!addNewClicked;selectTask(task.idMOUILL,task.LIGNE,task.NUMERO,task.TYPE_BOUEE,task.MOUILL_PROFONDEUR,task.DIAMETRE_CHAINE)" class="pull-right"><i class="glyphicon glyphicon-pencil">Mo </i></a>
+        <a   href="#reservations/{{task.LIGNE}} /{{task.NUMERO}}////"  class="pull-right"><i class="glyphicon glyphicon glyphicon-briefcase"></i> Re</a>
+        <a  ng-click="addNewClicked=!addNewClicked;  deleteAdhe(adherent.idADHERENT) ;" class="pull-right"><i class="glyphicon glyphicon-plus"></i>O</a>  
+        </label>
+     </div> 
+               
+    
+    
+</div>
+</div>
+</div>
